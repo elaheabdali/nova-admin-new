@@ -35,6 +35,12 @@ export function CreateUserPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const t = useTranslation();
+  type TranslationKey = Parameters<typeof t>[0];
+
+  const renderError = (error: string | undefined | any) => {
+    if (!error || typeof error !== 'string') return null;
+    return <small>{t(error as TranslationKey)}</small>;
+  };
   const [feedback, setFeedback] = useState<{
     type: 'success' | 'error';
     text: string;
@@ -96,9 +102,7 @@ export function CreateUserPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.name?.firstname && errors.name?.firstname && (
-                  <small>{t(errors.name.firstname as never)}</small>
-                )}
+                {touched.name?.firstname && renderError(errors.name?.firstname)}
               </Field>
               <Field>
                 <label htmlFor="name.lastname">{t('lastName')}</label>
@@ -109,9 +113,7 @@ export function CreateUserPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.name?.lastname && errors.name?.lastname && (
-                  <small>{t(errors.name.lastname as never)}</small>
-                )}
+                {touched.name?.lastname && renderError(errors.name?.lastname)}
               </Field>
               <Field>
                 <label htmlFor="username">{t('username')}</label>
@@ -122,9 +124,7 @@ export function CreateUserPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.username && errors.username && (
-                  <small>{t(errors.username as never)}</small>
-                )}
+                {touched.username && renderError(errors.username)}
               </Field>
               <Field>
                 <label htmlFor="email">{t('email')}</label>
@@ -137,9 +137,7 @@ export function CreateUserPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.email && errors.email && (
-                  <small>{t(errors.email as never)}</small>
-                )}
+                {touched.email && renderError(errors.email)}
               </Field>
               <Field>
                 <label htmlFor="password">{t('password')}</label>
@@ -152,9 +150,7 @@ export function CreateUserPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.password && errors.password && (
-                  <small>{t(errors.password as never)}</small>
-                )}
+                {touched.password && renderError(errors.password)}
               </Field>
               <Field>
                 <label htmlFor="phone">{t('phone')}</label>
@@ -167,9 +163,7 @@ export function CreateUserPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.phone && errors.phone && (
-                  <small>{t(errors.phone as never)}</small>
-                )}
+                {touched.phone && renderError(errors.phone)}
               </Field>
               {feedback && (
                 <div style={{ gridColumn: '1/-1' }}>
