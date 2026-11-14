@@ -9,6 +9,7 @@ import {
   Sun,
   Users,
   ShoppingBag,
+  LayoutDashboard,
 } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../Redux/hooks';
 import { setLanguage, setTheme } from '../Redux/settingsSlice';
@@ -137,6 +138,10 @@ export function AdminLayout() {
           <ShoppingBag className="bag" size={22} />
         </Logo>
         <Nav>
+          <NavItem to={ROUTES.dashboard}>
+            <LayoutDashboard size={18} />
+            {t('dashboard')}
+          </NavItem>
           <NavItem to={ROUTES.products}>
             <Boxes size={18} />
             {t('products')}

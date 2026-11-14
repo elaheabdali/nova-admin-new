@@ -13,6 +13,7 @@ import { UsersPage } from './Pages/UsersPage';
 import { CreateProductPage } from './Pages/CreateProductPage';
 import { CreateUserPage } from './Pages/CreateUserPage';
 import { AppLanguage } from './types/Enums/AppLanguage';
+import { DashboardPage } from './Pages/DashboardPage';
 
 function DirectionSync() {
   const language = useAppSelector((s) => s.settings.language);
@@ -40,7 +41,7 @@ export default function App() {
           path={ROUTES.login}
           element={
             isAuthenticated ? (
-              <Navigate to={ROUTES.products} replace />
+              <Navigate to={ROUTES.dashboard} replace />
             ) : (
               <LoginPage />
             )
@@ -50,8 +51,9 @@ export default function App() {
           <Route element={<AdminLayout />}>
             <Route
               path="/"
-              element={<Navigate to={ROUTES.products} replace />}
+              element={<Navigate to={ROUTES.dashboard} replace />}
             />
+            <Route path={ROUTES.dashboard} element={<DashboardPage />} />
             <Route path={ROUTES.products} element={<ProductsPage />} />
             <Route
               path={ROUTES.createProduct}
@@ -65,7 +67,7 @@ export default function App() {
           path="*"
           element={
             <Navigate
-              to={isAuthenticated ? ROUTES.products : ROUTES.login}
+              to={isAuthenticated ? ROUTES.dashboard : ROUTES.login}
               replace
             />
           }

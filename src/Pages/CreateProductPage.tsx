@@ -42,12 +42,6 @@ export function CreateProductPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const t = useTranslation();
-  type TranslationKey = Parameters<typeof t>[0];
-
-  const renderError = (error: string | undefined) => {
-    if (!error) return null;
-    return <small>{t(error as TranslationKey)}</small>;
-  };
   const [categories, setCategories] = useState<string[]>([]);
   const [categoryError, setCategoryError] = useState(false);
   const language = useAppSelector((s) => s.settings.language);
@@ -120,7 +114,9 @@ export function CreateProductPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.title && renderError(errors.title)}
+                {touched.title && t.error(errors.title) && (
+                  <small>{t.error(errors.title)}</small>
+                )}
               </Field>
               <Field>
                 <label htmlFor="price">{t('price')}</label>
@@ -134,7 +130,9 @@ export function CreateProductPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.price && renderError(errors.price)}
+                {touched.price && t.error(errors.price) && (
+                  <small>{t.error(errors.price)}</small>
+                )}
               </Field>
               <Field>
                 <label htmlFor="category">{t('category')}</label>
@@ -166,7 +164,9 @@ export function CreateProductPage() {
                     ))}
                   </Select>
                 )}
-                {touched.category && renderError(errors.category)}
+                {touched.category && t.error(errors.category) && (
+                  <small>{t.error(errors.category)}</small>
+                )}
               </Field>
               <Field>
                 <label htmlFor="image">{t('image')}</label>
@@ -179,7 +179,9 @@ export function CreateProductPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.image && renderError(errors.image)}
+                {touched.image && t.error(errors.image) && (
+                  <small>{t.error(errors.image)}</small>
+                )}
               </Field>
               <Field className="full">
                 <label htmlFor="description">{t('description')}</label>
@@ -190,7 +192,9 @@ export function CreateProductPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {touched.description && renderError(errors.description)}
+                {touched.description && t.error(errors.description) && (
+                  <small>{t.error(errors.description)}</small>
+                )}
               </Field>
               {feedback && (
                 <div className="full">
