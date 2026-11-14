@@ -15,6 +15,7 @@ import {
 import { EmptyView, ErrorView, LoadingView } from '../Shared/StatusView';
 import { useTranslation } from '../Shared/useTranslation';
 import { ROUTES } from '../Routes/routePaths';
+import { formatPrice } from '../Utils/formatPrice';
 
 const SearchBox = styled.div`
   position: relative;
@@ -63,6 +64,7 @@ export function ProductsPage() {
   const navigate = useNavigate();
   const t = useTranslation();
   const { items, loading, error, loaded } = useAppSelector((s) => s.products);
+  const language = useAppSelector((s) => s.settings.language);
   const [query, setQuery] = useState('');
   const filtered = useMemo(
     () =>
@@ -125,12 +127,7 @@ export function ProductsPage() {
                     <td>
                       <Category>{p.category}</Category>
                     </td>
-                    <td>
-                      {p.price.toLocaleString(undefined, {
-                        style: 'currency',
-                        currency: 'USD',
-                      })}
-                    </td>
+                    <td>{formatPrice(p.price, language)}</td>
                     <td>
                       <span style={{ color: '#8a96a8' }}>#{p.id}</span>
                     </td>
