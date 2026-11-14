@@ -7,7 +7,10 @@ const CATEGORY_LABELS_FA: Record<string, string> = {
   "women's clothing": 'پوشاک زنانه',
 };
 
-export function formatCategory(category: string, language: AppLanguage): string {
+export function formatCategory(
+  category: string,
+  language: AppLanguage,
+): string {
   const normalized = category.trim().toLowerCase();
 
   if (language === AppLanguage.Persian && CATEGORY_LABELS_FA[normalized]) {

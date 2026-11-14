@@ -13,7 +13,7 @@ const getInitialState = (): SettingsState => {
 
   return {
     language: savedLang || AppLanguage.Persian,
-    theme: savedTheme || AppTheme.Light, 
+    theme: savedTheme || AppTheme.Light,
   };
 };
 
