@@ -3,7 +3,7 @@ import { Formik, Form, type FormikHelpers } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ArrowRight, BadgeCheck } from 'lucide-react';
-import { useAppDispatch } from '../Redux/hooks';
+import { useAppDispatch, useAppSelector } from '../Redux/hooks';
 import { createProduct } from '../Redux/catalogSlice';
 import { productService } from '../Utils/services/productService';
 import type { ProductInput } from '../types';
@@ -20,6 +20,7 @@ import {
 } from '../Shared/primitives';
 import { useTranslation } from '../Shared/useTranslation';
 import { ROUTES } from '../Routes/routePaths';
+import { formatCategory } from '../Utils/formatCategory';
 
 const FormGrid = styled(Form)`
   display: grid;
@@ -49,6 +50,7 @@ export function CreateProductPage() {
   };
   const [categories, setCategories] = useState<string[]>([]);
   const [categoryError, setCategoryError] = useState(false);
+  const language = useAppSelector((s) => s.settings.language);
   const [feedback, setFeedback] = useState<{
     type: 'success' | 'error';
     text: string;
@@ -159,7 +161,7 @@ export function CreateProductPage() {
                     <option value="">{t('category')}</option>
                     {categories.map((c) => (
                       <option key={c} value={c}>
-                        {c}
+                        {formatCategory(c, language)}
                       </option>
                     ))}
                   </Select>

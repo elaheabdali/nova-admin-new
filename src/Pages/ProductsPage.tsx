@@ -16,6 +16,7 @@ import { EmptyView, ErrorView, LoadingView } from '../Shared/StatusView';
 import { useTranslation } from '../Shared/useTranslation';
 import { ROUTES } from '../Routes/routePaths';
 import { formatPrice } from '../Utils/formatPrice';
+import { formatCategory } from '../Utils/formatCategory';
 
 const SearchBox = styled.div`
   position: relative;
@@ -125,7 +126,9 @@ export function ProductsPage() {
                       </ProductCell>
                     </td>
                     <td>
-                      <Category>{p.category}</Category>
+                      <Category>
+                        {formatCategory(p.category, language)}
+                      </Category>
                     </td>
                     <td>{formatPrice(p.price, language)}</td>
                     <td>
